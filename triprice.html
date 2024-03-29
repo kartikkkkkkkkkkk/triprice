@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Price Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #6741d9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background-color: #6741d9;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 10px 10px 30px #4a2d6e, -10px -10px 30px #8d63ff;
+        width: 300px;
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: white;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid #4a2d6e;
+        background-color: white;
+        color: white;
+        box-shadow: inset 5px 5px 10px #4a2d6e, inset -5px -5px 10px #8d63ff;
+    }
+
+    button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #8d63ff;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 5px 5px 10px #4a2d6e, -5px -5px 10px #8d63ff;
+    }
+
+    button:hover {
+        background-color: #6741d9;
+    }
+
+    #result {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Trip Price Calculator</h1>
+
+    <label for="fuelPrice">Fuel Price (per liter/gallon):</label>
+    <input type="number" id="fuelPrice" step="0.01" min="0" placeholder="Fuel Price"><br>
+
+    <label for="distance">Distance (in kilometers/miles):</label>
+    <input type="number" id="distance" step="0.01" min="0" placeholder="Distance"><br>
+
+    <label for="averageFuelConsumption">Average Fuel Consumption (in liters/gallons per km/mile):</label>
+    <input type="number" id="averageFuelConsumption" step="0.01" min="0" placeholder="Average Fuel Consumption"><br>
+
+    <button onclick="calculatePrice()">Calculate</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function calculatePrice() {
+    var fuelPrice = parseFloat(document.getElementById("fuelPrice").value);
+    var distance = parseFloat(document.getElementById("distance").value);
+    var averageFuelConsumption = parseFloat(document.getElementById("averageFuelConsumption").value);
+
+    if (isNaN(fuelPrice) || isNaN(distance) || isNaN(averageFuelConsumption)) {
+        document.getElementById("result").innerHTML = "Please enter valid numbers for all fields.";
+        return;
+    }
+
+    var totalPrice = (distance / averageFuelConsumption * fuelPrice).toFixed(2);
+    document.getElementById("result").innerHTML = "Total trip price: $" + totalPrice;
+}
+</script>
+
+</body>
+</html>
